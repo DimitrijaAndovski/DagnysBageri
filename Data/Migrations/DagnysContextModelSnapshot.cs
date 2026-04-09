@@ -22,10 +22,6 @@ namespace DagnysBageri.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
@@ -33,9 +29,61 @@ namespace DagnysBageri.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ProductNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("SupplierId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("SupplierId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("DagnysBageri.Entities.Supplier", b =>
+                {
+                    b.Property<int>("SupplierId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ContactPerson")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SupplierName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SupplierId");
+
+                    b.ToTable("Suppliers");
+                });
+
+            modelBuilder.Entity("DagnysBageri.Entities.Product", b =>
+                {
+                    b.HasOne("DagnysBageri.Entities.Supplier", "Supplier")
+                        .WithMany("Products")
+                        .HasForeignKey("SupplierId");
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("DagnysBageri.Entities.Supplier", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
