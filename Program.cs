@@ -1,10 +1,8 @@
 
-using eShop.Data;
+using DagnysBageri.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 builder.Services.AddDbContext<DagnysContext>(options =>
 {
     options.UseSqlite(

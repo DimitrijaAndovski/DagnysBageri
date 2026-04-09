@@ -1,7 +1,7 @@
 using DagnysBageri.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace eShop.Data;
+namespace DagnysBageri.Data;
 
 public class DagnysContext(DbContextOptions options) : DbContext(options)
 {
